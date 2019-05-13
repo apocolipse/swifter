@@ -88,7 +88,7 @@ public enum HttpResponse {
     case internalServerError
     case raw(Int, String, [String:String]?, ((HttpResponseBodyWriter) throws -> Void)? )
 
-    func statusCode() -> Int {
+    public var statusCode: Int {
         switch self {
         case .switchProtocols         : return 101
         case .ok                      : return 200
@@ -122,7 +122,7 @@ public enum HttpResponse {
         }
     }
     
-    func headers() -> [String: String] {
+    public func headers() -> [String: String] {
         var headers = ["Server": "Swifter \(HttpServer.VERSION)"]
         switch self {
         case .switchProtocols(let switchHeaders, _):
@@ -179,5 +179,5 @@ public enum HttpResponse {
 */
 
 func == (inLeft: HttpResponse, inRight: HttpResponse) -> Bool {
-    return inLeft.statusCode() == inRight.statusCode()
+    return inLeft.statusCode == inRight.statusCode
 }
